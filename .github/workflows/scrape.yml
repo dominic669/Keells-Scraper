@@ -16,22 +16,16 @@ jobs:
         with:
           python-version: '3.11'
       
+      - name: Create credentials.json from secret
+        run: |
+          echo '${{ secrets.GCP_SERVICE_ACCOUNT }}' > credentials.json
+      
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
       
-      - name: Debug - list files and show scraper.py
-        run: |
-          ls -la
-          echo "=== First 20 lines of scraper.py ==="
-          head -20 scraper.py
-      
-      - name: Test environment variable
-        run: |
-          echo "GOOGLE_SHEET_ID is set to: ${{ secrets.GOOGLE_SHEET_ID }}"
-      
-      - name: Run scraper with verbose output
+      - name: Run scraper
         env:
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
         run: |
-          python -u scraper.py 2>&1
+          python scraper.py
