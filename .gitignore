@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+venv/
+env/
+.env
+
+# Google OAuth
+credentials.json
+token.pickle
+
+# Application data
+data/
+*.log
+
+# Config (contains sensitive info)
+config.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
