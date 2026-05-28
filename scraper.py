@@ -496,3 +496,22 @@ class KeellsScraper:
             if match:
                 return float(match.group(1))
         return None
+
+
+if __name__ == "__main__":
+    import sys
+    print("Starting scraper...", file=sys.stderr)
+    
+    scraper = KeellsScraper()
+    print("Scraper initialized, starting scrape...", file=sys.stderr)
+    
+    results = scraper.scrape_all_categories()
+    print(f"Scraping complete. Found {len(results)} categories", file=sys.stderr)
+    
+    total_products = sum(len(products) for products in results.values())
+    print(f"Total products found: {total_products}", file=sys.stderr)
+    
+    if total_products > 0:
+        print(json.dumps(results, indent=2))
+    else:
+        print("No products found", file=sys.stderr)
