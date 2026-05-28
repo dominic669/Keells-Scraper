@@ -20,8 +20,18 @@ jobs:
         run: |
           pip install -r requirements.txt
       
-      - name: Run scraper
+      - name: Debug - list files and show scraper.py
+        run: |
+          ls -la
+          echo "=== First 20 lines of scraper.py ==="
+          head -20 scraper.py
+      
+      - name: Test environment variable
+        run: |
+          echo "GOOGLE_SHEET_ID is set to: ${{ secrets.GOOGLE_SHEET_ID }}"
+      
+      - name: Run scraper with verbose output
         env:
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
         run: |
-          python scraper.py
+          python -u scraper.py 2>&1
